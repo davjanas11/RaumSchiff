@@ -7,6 +7,7 @@ public class Raumschiff {
     private int energieversorgungInProzent;
     private int photonentorpedoAnzahl;
     private int lebenserhaltungssystemeInProzent;
+    private ArrayList<String> ladungsverzeichnis;
 
     public Raumschiff(String schiffsname, int huelleInProzent, int schildeInProzent, int energieversorgungInProzent,
                       int photonentorpedoAnzahl, int lebenserhaltungssystemeInProzent) {
@@ -16,17 +17,38 @@ public class Raumschiff {
         this.energieversorgungInProzent = energieversorgungInProzent;
         this.photonentorpedoAnzahl = photonentorpedoAnzahl;
         this.lebenserhaltungssystemeInProzent = lebenserhaltungssystemeInProzent;
+        this.ladungsverzeichnis = new ArrayList<>();
     }
 
-    public void photonentorpedoSchiessen() {
+    public void photonentorpedoSchiessen(Raumschiff ziel) {
         if (photonentorpedoAnzahl > 0) {
-            treffer();
+            ziel.treffer();
             photonentorpedoAnzahl--;
         }
     }
 
-    public void phaserkanoneSchiessen() {
-        treffer();
+    public void phaserkanoneSchiessen(Raumschiff ziel) {
+        ziel.treffer();
+    }
+
+    public void sendeNachricht(String nachricht) {
+        System.out.println(this.schiffsname + " sendet eine Nachricht: " + nachricht);
+    }
+
+    public void zustandAbrufen() {
+        System.out.println("Zustand des " + this.schiffsname + ":");
+        System.out.println("Hülle: " + this.huelleInProzent + "%");
+        System.out.println("Schilde: " + this.schildeInProzent + "%");
+        System.out.println("Energieversorgung: " + this.energieversorgungInProzent + "%");
+        System.out.println("Photonentorpedos: " + this.photonentorpedoAnzahl);
+        System.out.println("Lebenserhaltungssysteme: " + this.lebenserhaltungssystemeInProzent + "%");
+    }
+
+    public void ladungsverzeichnisAusgeben() {
+        System.out.println("Ladungsverzeichnis des " + this.schiffsname + ":");
+        for (String ladung : this.ladungsverzeichnis) {
+            System.out.println(ladung);
+        }
     }
 
     private void treffer() {
